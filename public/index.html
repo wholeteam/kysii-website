@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Kysii — Real Talk, Real Mixes</title>
+<meta name="description" content="Kysii Ingram — host of The Kickin' It W/ Kysii Show and Jammin' It With Kysii on X Squad Radio, co-owner of Cafe Bartique in Atlanta, and IAM/PAM engineer.">
+<meta property="og:title" content="Kysii — Real Talk, Real Mixes">
+<meta property="og:description" content="Host, DJ, X Squad Radio founder, Cafe Bartique co-owner and identity security engineer in Atlanta.">
+<meta property="og:image" content="https://kysii.com/img/portrait.webp">
+<meta property="og:url" content="https://kysii.com/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;800;900&display=swap" rel="stylesheet">
+<style>
+/* VOICE: confident, down to earth, a little loud — "your guy, Kysii"
+   IDEA: a broadcaster's channel page — vertical clips + on-air card
+   PICTURE: fanned stack of 9:16 clip cards beside the giant name, silver-edged
+   COLOUR and TYPE: black, signal red, brushed silver, white; Archivo 900 for the name
+   LAYOUT: black hero, red strip, white/black content bands, X Squad on-air band, black contact close */
+:root{color-scheme:light dark;
+ --bg:light-dark(#ffffff,#0b0b0d);--alt:light-dark(#f2f2f4,#141417);--ink:light-dark(#0e0e10,#f4f4f6);--mute:light-dark(#55565c,#a6a8b0);
+ --blk:#0b0b0d;--blk2:#17171b;--red:#d7141a;--red2:#a30f14;--silver:#c4c6cc;
+ --metal:linear-gradient(135deg,#f4f5f7 0%,#b9bcc3 38%,#eceef1 55%,#9a9da5 100%);
+ --card:light-dark(#fff,#141417);--line:light-dark(#e2e3e7,#26262c)}
+:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 Archivo,system-ui,sans-serif;overflow-x:clip}
+a{color:inherit}
+.wrap{max-width:1240px;margin:0 auto}
+.band{padding:clamp(48px,7vw,104px) max(5vw,16px)}
+h1,h2,h3{margin:0;line-height:1.05;text-wrap:balance}
+h2{font-size:clamp(32px,4.4vw,52px);font-weight:900;letter-spacing:-.02em}
+h3{font-size:20px;font-weight:800}
+.lede{font-size:17px;color:var(--mute);max-width:62ch;margin:14px 0 0}
+.dark{background:var(--blk);color:#f4f4f6}.dark .lede{color:#a6a8b0}
+.btn{display:inline-flex;align-items:center;gap:10px;min-height:48px;padding:0 22px;border-radius:999px;font-weight:700;text-decoration:none;border:2px solid currentColor;transition:transform .15s,background .15s}
+.btn:hover{transform:translateY(-2px)}
+.btn.solid{background:var(--red);border-color:var(--red);color:#fff}
+.btn.solid:hover{background:var(--red2);border-color:var(--red2)}
+.btn.metal{background:var(--metal);border-color:transparent;color:#0b0b0d}
+:focus-visible{outline:3px solid var(--red);outline-offset:3px}
+
+nav{position:sticky;top:0;z-index:20;background:rgba(11,11,13,.94);backdrop-filter:blur(8px);color:#fff;border-bottom:1px solid #222}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px max(5vw,16px);flex-wrap:wrap}
+.logo{font:900 24px/1 Archivo;letter-spacing:-.03em;text-decoration:none;background:var(--metal);-webkit-background-clip:text;background-clip:text;color:transparent}
+.logo i{font-style:normal;color:var(--red);-webkit-text-fill-color:var(--red)}
+nav ul{display:flex;gap:4px;list-style:none;margin:0;padding:0;flex-wrap:wrap}
+nav ul a{display:block;padding:10px 12px;border-radius:8px;text-decoration:none;font-weight:600;font-size:15px;color:#d9dade}
+nav ul a:hover{background:#1e1e23;color:#fff}
+nav .live{background:var(--red);color:#fff}
+
+.hero{padding-top:clamp(32px,5vw,72px);padding-bottom:0;overflow:hidden;background:radial-gradient(80% 60% at 85% 100%,rgba(215,20,26,.35),transparent 70%),var(--blk)}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:32px;align-items:end}
+.hero h1{font-size:clamp(84px,16vw,210px);font-weight:900;letter-spacing:-.05em;line-height:.85;background:var(--metal);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero .tag{font:800 clamp(20px,2.4vw,28px)/1.2 Archivo;margin:18px 0 0;max-width:24ch}
+.hero .tag em{font-style:normal;color:var(--red)}
+.hero p.sub{color:#b9bbc2;max-width:48ch;margin:16px 0 26px;font-size:17px}
+.hero .cta{display:flex;gap:12px;flex-wrap:wrap;padding-bottom:clamp(40px,6vw,88px)}
+.stack{position:relative;height:clamp(380px,46vw,560px)}
+.clip{position:absolute;width:clamp(150px,17vw,230px);aspect-ratio:9/16;border-radius:22px;overflow:hidden;box-shadow:0 30px 60px rgba(0,0,0,.6);border:3px solid #d5d7dc;background:#1a1a1f}
+.clip:nth-child(1){left:2%;transform:rotate(-9deg);bottom:-60px}
+.clip:nth-child(2){left:31%;z-index:2;bottom:-10px;border-color:#fff}
+.clip:nth-child(3){left:60%;transform:rotate(8deg);bottom:-50px}
+.ph{position:absolute;inset:0}
+img.ph{width:100%;height:100%;object-fit:cover;display:block}
+.gal img{width:100%;height:100%;object-fit:cover;display:block}
+.meta{position:absolute;left:0;right:0;bottom:0;padding:14px;background:linear-gradient(transparent,rgba(0,0,0,.8));font-size:13px;font-weight:600;line-height:1.3;color:#fff}
+.plat{position:absolute;top:12px;left:12px;background:rgba(0,0,0,.55);padding:4px 10px;border-radius:999px;font-size:13px;font-weight:700;color:#fff;display:flex;gap:6px;align-items:center}
+.plat svg{width:15px;height:15px}
+.play{position:absolute;top:50%;left:50%;width:56px;height:56px;margin:-28px;border-radius:50%;background:var(--red);display:grid;place-items:center;box-shadow:0 6px 20px rgba(215,20,26,.5)}
+.play::after{content:"";border-left:16px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px}
+
+.strip{background:var(--red);color:#fff;padding:16px max(5vw,16px);font-weight:800;font-size:clamp(15px,1.6vw,19px)}
+.strip .wrap{display:flex;flex-wrap:wrap;gap:8px 28px;justify-content:center}
+
+.head{display:flex;justify-content:space-between;align-items:end;gap:20px;flex-wrap:wrap;margin-bottom:28px}
+.tabs{display:flex;gap:6px;background:var(--alt);border:1px solid var(--line);padding:5px;border-radius:999px}
+.tabs button{font:600 15px Archivo;min-height:44px;padding:0 18px;border:0;border-radius:999px;background:none;color:var(--ink);cursor:pointer}
+.tabs button[aria-pressed=true]{background:var(--blk);color:#fff}
+:root[data-theme=dark] .tabs button[aria-pressed=true]{background:var(--red)}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]) .tabs button[aria-pressed=true]{background:var(--red)}}
+.reels{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:18px}
+.reel{position:relative;aspect-ratio:9/16;border-radius:18px;overflow:hidden;text-decoration:none;background:#1a1a1f;transition:transform .2s;border:2px solid var(--line)}
+.reel:hover{transform:translateY(-4px)}
+.note{font-size:13px;color:var(--mute);margin-top:16px}
+
+/* on air */
+.onair .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(28px,5vw,72px);align-items:center}
+.radio{position:relative;border-radius:28px;padding:28px;background:var(--metal);color:#0b0b0d;box-shadow:0 30px 60px rgba(0,0,0,.5)}
+.screen{background:#0b0b0d;color:#fff;border-radius:18px;padding:22px}
+.screen .now{display:flex;align-items:center;gap:8px;color:var(--red);font-weight:800;font-size:14px}
+.dot{width:10px;height:10px;border-radius:50%;background:var(--red);animation:pulse 1.6s infinite}
+@keyframes pulse{50%{opacity:.25}}
+.screen h3{font-size:clamp(24px,3vw,34px);margin:10px 0 4px}
+.screen p{margin:0;color:#a6a8b0}
+.eq{display:flex;align-items:flex-end;gap:5px;height:56px;margin-top:20px}
+.eq i{flex:1;background:linear-gradient(#ff3b40,var(--red2));border-radius:3px 3px 0 0;animation:eq 1.2s ease-in-out infinite alternate}
+@keyframes eq{from{height:15%}to{height:100%}}
+.knobs{display:flex;justify-content:space-between;align-items:center;margin-top:18px;font-weight:800;font-size:14px}
+.knobs span{width:44px;height:44px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff,#8d9098);box-shadow:inset 0 -3px 6px rgba(0,0,0,.3)}
+.shows{list-style:none;padding:0;margin:22px 0 26px;display:grid;gap:10px}
+.shows li{display:flex;gap:14px;align-items:baseline;border-bottom:1px solid #26262c;padding-bottom:10px}
+.shows b{flex:none;color:var(--silver);min-width:7.5em}
+
+.about .wrap{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(28px,5vw,72px);align-items:center}
+.portrait{position:relative;aspect-ratio:4/5;border-radius:28px;overflow:hidden;background:linear-gradient(170deg,#2a2a31,#0b0b0d 75%);border:3px solid var(--silver)}
+.portrait .badge{position:absolute;right:-1px;bottom:28px;background:var(--red);color:#fff;font-weight:800;padding:12px 18px;border-radius:14px 0 0 14px}
+.about p{font-size:17px;max-width:62ch}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-top:24px}
+.fact{background:var(--alt);border:1px solid var(--line);border-left:4px solid var(--red);border-radius:12px;padding:16px}
+.fact b{display:block;font-size:18px}
+.fact span{font-size:14px;color:var(--mute)}
+
+.press{background:var(--alt);border-block:1px solid var(--line);padding:28px max(5vw,16px)}
+.press .wrap{display:flex;flex-wrap:wrap;align-items:center;gap:14px 36px;justify-content:center}
+.press small{font-weight:700;color:var(--mute);font-size:14px}
+.press a{font-weight:900;font-size:clamp(17px,2vw,22px);text-decoration:none;opacity:.85}
+.press a:hover{opacity:1;color:var(--red)}
+
+.vgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}
+.v{display:flex;flex-direction:column;gap:10px;padding:24px;border-radius:20px;background:var(--card);border:1px solid var(--line);text-decoration:none;transition:border-color .2s,transform .2s}
+.v:hover{border-color:var(--red);transform:translateY(-3px)}
+.ic{width:52px;height:52px;border-radius:14px;display:grid;place-items:center;background:var(--blk);color:#fff;border:2px solid var(--silver)}
+.ic svg{width:26px;height:26px}
+.v p{margin:0;color:var(--mute);font-size:15px}
+.v .go{margin-top:auto;font-weight:700;font-size:15px;color:var(--red)}
+
+.merch .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(28px,5vw,72px);align-items:center}
+.tees{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.tee{aspect-ratio:4/5;border-radius:18px;background:var(--alt);border:1px solid var(--line);display:grid;place-items:center;position:relative}
+.tee svg{width:78%}
+.tee span{position:absolute;bottom:10px;font-size:13px;font-weight:700;color:var(--mute)}
+
+.gal{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-rows:170px;gap:14px}
+.gal div{border-radius:18px;position:relative;overflow:hidden}
+.gal div:nth-child(1){grid-column:span 2;grid-row:span 2}
+.gal div:nth-child(4){grid-row:span 2}
+.gal div:nth-child(6){grid-column:span 2}
+.gal span{position:absolute;left:0;right:0;bottom:0;padding:24px 12px 10px;background:linear-gradient(transparent,rgba(0,0,0,.7));color:#fff;font-size:13px;font-weight:600}
+
+.contact .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(28px,5vw,72px)}
+.socials{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+.socials a{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border-radius:999px;background:#1e1e23;border:1px solid #33333a;text-decoration:none;font-weight:600}
+.socials a:hover{border-color:var(--red)}
+.socials svg{width:18px;height:18px}
+form{display:grid;gap:14px;background:#fff;color:#0e0e10;padding:clamp(20px,3vw,32px);border-radius:24px;border-top:6px solid var(--red)}
+label{font-weight:600;font-size:15px;display:grid;gap:6px}
+input,select,textarea{font:16px Archivo;padding:12px 14px;border:1.5px solid #d4d5da;border-radius:12px;background:#fff;color:#0e0e10;min-height:48px}
+textarea{min-height:120px;resize:vertical}
+form .btn{justify-self:start;cursor:pointer;font:700 16px Archivo}
+.ok{display:none;background:#f1f1f3;padding:12px 14px;border-radius:12px;font-weight:600}
+footer{background:#000;color:#9a9ca4;padding:28px max(5vw,16px);font-size:14px;border-top:3px solid var(--red)}
+footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+
+@media(max-width:860px){
+ .hero .wrap,.about .wrap,.contact .wrap,.onair .wrap,.merch .wrap{grid-template-columns:minmax(0,1fr)}
+ .hero .cta{padding-bottom:12px}.stack{height:400px}
+ .gal{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:600px){nav ul li:not(:last-child){display:none}.clip{width:42%}.clip:nth-child(1){left:-4%}.clip:nth-child(2){left:29%}.clip:nth-child(3){left:62%}.shows li{flex-direction:column;gap:2px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<nav><div class="wrap">
+ <a class="logo" href="#top">KYSII<i>.</i></a>
+ <ul>
+  <li><a href="#shorts">Shorts</a></li>
+  <li><a href="#about">About</a></li>
+  <li><a href="#ventures">Ventures</a></li>
+  <li><a href="#merch">Merch</a></li>
+  <li><a href="#contact">Contact</a></li>
+  <li><a class="live" href="https://xsquadradio.com">● Listen live</a></li>
+ </ul>
+</div></nav>
+
+<header class="band hero dark" id="top"><div class="wrap">
+ <div>
+  <h1>KYSII</h1>
+  <p class="tag">Real talk with your guy. <em>Not your average.</em></p>
+  <p class="sub">Host, DJ and founder of the X Squad Radio Network. Co-owner of Cafe Bartique in Atlanta. Identity security engineer by trade. Catch it all in quick hits on YouTube and Instagram.</p>
+  <div class="cta">
+   <a class="btn solid" href="#shorts">Watch the clips</a>
+   <a class="btn metal" href="https://xsquadradio.com">Listen on X Squad Radio</a>
+  </div>
+ </div>
+ <div class="stack" aria-hidden="true">
+  <div class="clip"><img class="ph" src="img/x-squad-hoodie.webp" alt="" style="object-position:50% 30%"><span class="plat">Reels</span><div class="meta">Repping X Squad Radio</div></div>
+  <div class="clip"><img class="ph" src="img/dj-cartoon.webp" alt=""><span class="plat">Shorts</span><div class="play"></div><div class="meta">Jammin' It With Kysii, live</div></div>
+  <div class="clip"><img class="ph" src="img/at-work.webp" alt="" style="object-position:30% 40%"><span class="plat">Shorts</span><div class="meta">Day job: securing identities</div></div>
+ </div>
+</div></header>
+
+<div class="strip"><div class="wrap">
+ <span>Podcast host</span><span>DJ</span><span>Grill master</span><span>X Squad Radio founder</span><span>Café co-owner</span><span>CyberArk engineer</span><span>Atlanta</span>
+</div></div>
+
+<section class="band" id="shorts"><div class="wrap">
+ <div class="head">
+  <div><h2>Short-form, full story.</h2>
+  <p class="lede">Quick hits on life, business, music and tech — the conversations, the mixes and what's happening behind the counter.</p></div>
+  <div class="tabs" role="group" aria-label="Filter clips">
+   <button type="button" data-f="all" aria-pressed="true">All</button>
+   <button type="button" data-f="yt" aria-pressed="false">YouTube</button>
+   <button type="button" data-f="ig" aria-pressed="false">Instagram</button>
+  </div>
+ </div>
+ <div class="reels" id="reels"></div>
+ <p style="margin:22px 0 0;display:flex;gap:12px;flex-wrap:wrap"><a class="btn" href="https://instagram.com/kickinitwithkysii">Follow @kickinitwithkysii on Instagram</a> <a class="btn" href="https://www.youtube.com/channel/UCYqZ4RXDXOsEZqv50euu7og">Subscribe on YouTube</a></p>
+ <p class="note">Sample clips shown — these get replaced by your latest Shorts and Reels, pulled in automatically.</p>
+</div></section>
+
+<section class="band dark onair" id="radio"><div class="wrap">
+ <div class="radio" aria-hidden="true">
+  <div class="screen">
+   <div class="now"><span class="dot"></span>ON AIR · X SQUAD RADIO</div>
+   <h3>Jammin' It With Kysii</h3>
+   <p>Hip-hop, R&amp;B, house and soul</p>
+   <div class="eq" id="eq"></div>
+  </div>
+  <div class="knobs"><span></span>XSQUADRADIO.COM<span></span></div>
+ </div>
+ <div>
+  <h2>Live on X Squad Radio.</h2>
+  <p class="lede">I founded the X Squad Radio Network to give real DJs and independent voices a home — hip-hop, R&amp;B, house and soul, streaming 24/7 on the web, in the app and on Alexa.</p>
+  <ul class="shows">
+   <li><b>Music</b><span>Jammin' It With Kysii — my mix show</span></li>
+   <li><b>Talk</b><span>The Kickin' It W/ Kysii Show</span></li>
+   <li><b>Curated</b><span>The World Show · Free Your Soul · The 90s Dope</span></li>
+  </ul>
+  <a class="btn solid" href="https://xsquadradio.com">● Listen live</a>
+ </div>
+</div></section>
+
+<section class="band about" id="about"><div class="wrap">
+ <div class="portrait">
+  <img class="ph" src="img/portrait.webp" alt="Kysii Ingram in an Atlanta jersey and ATL chain" style="object-position:40% 20%">
+  <span class="badge">ATL made</span>
+ </div>
+ <div>
+  <h2>Hey, I'm Kysii.</h2>
+  <p><strong>Husband, dad, true hip-hop head, tech junkie and human “search engine.”</strong> Newport News, Virginia raised, Morehouse educated, Atlanta made.</p>
+  <p>Tune into any of my shows and you'll find out quick: I'm a down-to-earth guy, the one family and friends call when they need a resource or some advice. I believe in karma and inner peace, I try to live stress-free, and I love putting a spotlight on my guests as we take on the topics everybody's talking about.</p>
+  <p>Long before podcasts were everywhere, I was working with unsigned independent artists, building a one-stop shop that helped hundreds of them market and distribute their music. That grew into the X Squad Affiliates — a network of podcasters and broadcasters — and then X Squad Radio.</p>
+  <p>Today my wife Angela and I own Cafe Bartique on Cascade Road in Atlanta, and by trade I'm an identity and privileged-access security engineer with Generational Technology Group. My short-form content is where all of it comes together.</p>
+  <div class="facts">
+   <div class="fact"><b>X Squad</b><span>Radio network founder</span></div>
+   <div class="fact"><b>Cafe Bartique</b><span>Co-owner, Cascade Rd</span></div>
+   <div class="fact"><b>IAM / PAM</b><span>CyberArk engineer</span></div>
+  </div>
+ </div>
+</div></section>
+
+<div class="press"><div class="wrap">
+ <small>As seen on</small>
+ <a href="https://www.cbsnews.com/atlanta/news/atlanta-business-owners-feel-impact-of-i-285s-weekend-construction-shutdown/">CBS News Atlanta</a>
+ <a href="https://www.wabe.org/were-not-going-anywhere-black-restaurant-week-celebrates-10-years-in-atlanta/">WABE 90.1</a>
+ <a href="https://www.iamcasme.com/post/interview-w-kysii">The Voice's Casmè</a>
+ <a href="https://podcasts.apple.com/us/podcast/interview-with-kysii-ingram/id1531262987?i=1000490871880">StaceySports Radio</a>
+</div></div>
+
+<section class="band" id="ventures"><div class="wrap">
+ <div class="head"><div><h2>What I'm building.</h2><p class="lede">Every one of these started as an idea I couldn't let go of.</p></div></div>
+ <div class="vgrid" id="vgrid"></div>
+</div></section>
+
+<section class="band merch" id="merch" style="background:var(--alt)"><div class="wrap">
+ <div>
+  <h2>Merch is coming back.</h2>
+  <p class="lede">The shirt shop is being rebuilt. Drop your email and you'll be first to know when the new drop goes live.</p>
+  <form id="mf" style="margin-top:22px;max-width:440px" novalidate>
+   <label for="me">Email<input id="me" type="email" autocomplete="email" required></label>
+   <button class="btn solid" type="submit">Notify me</button>
+   <div class="ok" id="mok" role="status">You're on the list — thanks! (Preview: not connected yet.)</div>
+  </form>
+ </div>
+ <div class="tees" id="tees"></div>
+</div></section>
+
+<section class="band" id="gallery"><div class="wrap">
+ <div class="head"><div><h2>Moments.</h2><p class="lede">Game days, good people, and the city that made me.</p></div></div>
+ <div class="gal" id="gal"></div>
+</div></section>
+
+<section class="band dark contact" id="contact"><div class="wrap">
+ <div>
+  <h2>Let's work together.</h2>
+  <p class="lede">Brand collabs, guest spots, advertising on X Squad Radio, IAM/PAM consulting, or just to say what's up — drop a line.</p>
+  <div class="socials" id="socials"></div>
+ </div>
+ <form id="f" novalidate>
+  <label for="n">Name<input id="n" autocomplete="name" required></label>
+  <label for="e">Email<input id="e" type="email" autocomplete="email" required></label>
+  <label for="t">What's it about?
+   <select id="t"><option>Brand collab</option><option>Guest spot / interview</option><option>Advertise on X Squad Radio</option><option>IAM / PAM consulting</option><option>Something else</option></select></label>
+  <label for="m">Message<textarea id="m" required></textarea></label>
+  <button class="btn solid" type="submit">Send message</button>
+  <div class="ok" id="ok" role="status">Thanks — this form is a preview and will be connected before launch.</div>
+ </form>
+</div></section>
+
+<footer><div class="wrap">
+ <span>© <span id="yr"></span> Kysii Ingram · Real talk with your guy.</span>
+ <a href="https://xsquadradio.com">xsquadradio.com</a>
+</div></footer>
+
+<script>
+{
+const ic={
+ yt:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M23 7.2a3 3 0 0 0-2.1-2.1C19 4.6 12 4.6 12 4.6s-7 0-8.9.5A3 3 0 0 0 1 7.2 31 31 0 0 0 .5 12 31 31 0 0 0 1 16.8a3 3 0 0 0 2.1 2.1c1.9.5 8.9.5 8.9.5s7 0 8.9-.5a3 3 0 0 0 2.1-2.1 31 31 0 0 0 .5-4.8 31 31 0 0 0-.5-4.8zM9.7 15.1V8.9L15.5 12z"/></svg>',
+ ig:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>',
+ mic:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v4"/></svg>',
+ shield:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/></svg>',
+ cup:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 8h13v6a6 6 0 0 1-6 6h-1a6 6 0 0 1-6-6z"/><path d="M17 10h1.5a2.5 2.5 0 0 1 0 5H17M8 2v3M12 2v3"/></svg>',
+ radio:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="8" width="18" height="13" rx="2"/><circle cx="15" cy="14.5" r="3"/><path d="M7 12h3M7 16h3M6 8l10-5"/></svg>',
+ fire:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2c1 4 5 6 5 11a5 5 0 0 1-10 0c0-3 2-4 2-7 2 1 3 3 3 5 1-1 1-3 0-9z"/><path d="M4 22h16"/></svg>',
+ bag:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 7h14l-1 14H6z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg>'
+};
+const grads=['#e3262c,#5a0609','#4a4b52,#0b0b0d','#c4c6cc,#55575e','#1f1f24,#000','#b0141a,#2a0204','#8d9098,#2a2b30','#d7141a,#0b0b0d','#3a3b42,#111'];
+const clips=[
+ {p:'yt',t:"Kickin' It W/ Kysii — the conversation everybody's having"},
+ {p:'ig',t:'Saturday morning at Cafe Bartique'},
+ {p:'yt',t:"Jammin' It With Kysii — 90s slow jams"},
+ {p:'ig',t:'Behind the boards at X Squad Radio'},
+ {p:'yt',t:'Running a café, a station and a day job'},
+ {p:'ig',t:'New on the menu this week'},
+ {p:'yt',t:"Cookin' It With Kysii — low and slow ribs",u:'https://www.youtube.com/@kysiicooks'},
+ {p:'ig',t:'Fired up the grill for the weekend'},
+ {p:'yt',t:'Security tip: protect your admin accounts'},
+ {p:'ig',t:'Black Restaurant Week on Cascade'}
+];
+const R=document.getElementById('reels');
+const draw=f=>{R.innerHTML=clips.map((c,i)=>({...c,i})).filter(c=>f==='all'||c.p===f).map(c=>
+ `<a class="reel" href="${c.u?c.u:c.p==='ig'?'https://instagram.com/kickinitwithkysii':'https://www.youtube.com/channel/UCYqZ4RXDXOsEZqv50euu7og'}" aria-label="${c.p==='yt'?'YouTube Short':'Instagram Reel'}: ${c.t}"><div class="ph" style="background:linear-gradient(160deg,${grads[c.i%grads.length]})"></div><span class="plat">${ic[c.p]}${c.p==='yt'?'Shorts':'Reels'}</span><div class="play"></div><div class="meta">${c.t}</div></a>`).join('')};
+draw('all');
+document.querySelectorAll('.tabs button').forEach(b=>b.addEventListener('click',()=>{
+ document.querySelectorAll('.tabs button').forEach(x=>x.setAttribute('aria-pressed',x===b));draw(b.dataset.f)}));
+
+document.getElementById('eq').innerHTML=Array.from({length:18},(_,i)=>`<i style="animation-delay:${(i*137%900)/1000}s;animation-duration:${.7+(i*53%60)/100}s"></i>`).join('');
+
+const ventures=[
+ {i:'radio',n:'X Squad Radio',d:'The network I founded — real DJs, hip-hop, R&B, house and soul, live 24/7 on the web, the app and Alexa.',u:'https://xsquadradio.com',l:'Listen at xsquadradio.com'},
+ {i:'mic',n:"The Kickin' It W/ Kysii Show",d:'Real talk with your guy — guests, current events, relationships and the topics everybody is debating.',u:'#contact',l:'Be a guest'},
+ {i:'fire',n:"Cookin' It With Kysii",d:'My grilling channel on YouTube — fire, smoke, seasoning and backyard cooks. Quick grill clips land on my Instagram too.',u:'https://www.youtube.com/@kysiicooks',l:'@kysiicooks'},
+ {i:'cup',n:'Cafe Bartique',d:'The neighborhood coffee shop my wife Angela and I own on Cascade Road in Atlanta — coffee, pastries, events and catering.',u:'https://cafebartique.com',l:'cafebartique.com'},
+ {i:'shield',n:'Generational Technology Group',d:'IAM and PAM consulting — CyberArk expertise for organizations protecting their most privileged access.',u:'https://generationaltechgroup.com',l:'generationaltechgroup.com'}
+];
+document.getElementById('vgrid').innerHTML=ventures.map(v=>`<a class="v" href="${v.u}"><span class="ic">${ic[v.i]}</span><h3>${v.n}</h3><p>${v.d}</p><span class="go">${v.l} →</span></a>`).join('');
+
+const tee=(body,ink)=>`<svg viewBox="0 0 100 100"><path d="M30 12l-18 10 7 16 8-4v54h46V34l8 4 7-16-18-10c-3 6-9 9-16 9s-13-3-16-9z" fill="${body}" stroke="rgba(0,0,0,.15)"/><text x="50" y="56" text-anchor="middle" font-family="Archivo" font-weight="900" font-size="12" fill="${ink}">KYSII</text><rect x="38" y="60" width="24" height="2.5" fill="#d7141a"/></svg>`;
+document.getElementById('tees').innerHTML=[['#0b0b0d','#c4c6cc','Black'],['#ffffff','#0b0b0d','White'],['#d7141a','#ffffff','Red']].map(t=>`<div class="tee">${tee(t[0],t[1])}<span>${t[2]}</span></div>`).join('');
+
+const gal=[['cafe-bartique-event','Out front at Cafe Bartique','50% 35%'],['falcons-with-angela','Falcons Sundays with Angela','50% 40%'],['morehouse','Back home at Morehouse','40% 40%'],['x-squad-jersey','Repping the X Squad','50% 30%'],['game-day','Game day in the A','50% 35%'],['gala','A night out with Angela','50% 22%'],['glasses','Everyday Kysii','50% 30%']];
+document.getElementById('gal').innerHTML=gal.map(g=>`<div><img src="img/${g[0]}.webp" alt="${g[1]}" loading="lazy" style="object-position:${g[2]}"><span>${g[1]}</span></div>`).join('');
+
+const so=[{i:'yt',n:'Kickin\' It With Kysii',u:'https://www.youtube.com/channel/UCYqZ4RXDXOsEZqv50euu7og'},{i:'fire',n:'@kysiicooks',u:'https://www.youtube.com/@kysiicooks'},{i:'ig',n:'@kickinitwithkysii',u:'https://instagram.com/kickinitwithkysii'},{i:'radio',n:'X Squad Radio',u:'https://xsquadradio.com'},{i:'cup',n:'Cafe Bartique',u:'https://cafebartique.com'}];
+document.getElementById('socials').innerHTML=so.map(s=>`<a href="${s.u}">${ic[s.i]}${s.n}</a>`).join('');
+
+const hook=(fid,oid)=>document.getElementById(fid).addEventListener('submit',e=>{e.preventDefault();const f=e.target;
+ if(!f.checkValidity()){f.reportValidity();return}document.getElementById(oid).style.display='block';f.reset()});
+hook('f','ok');hook('mf','mok');
+document.getElementById('yr').textContent=new Date().getFullYear();
+}
+</script>
+</body>
+</html>
