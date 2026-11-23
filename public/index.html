@@ -7,7 +7,10 @@
 <meta name="description" content="Kysii Ingram — host of The Kickin' It W/ Kysii Show and Jammin' It With Kysii on X Squad Radio, co-owner of Cafe Bartique in Atlanta, and IAM/PAM engineer.">
 <meta property="og:title" content="Kysii — Real Talk, Real Mixes">
 <meta property="og:description" content="Host, DJ, X Squad Radio founder, Cafe Bartique co-owner and identity security engineer in Atlanta.">
-<meta property="og:image" content="https://kysii.com/img/portrait.webp">
+<meta property="og:image" content="https://kysii.com/img/kickin-it-cover.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <meta property="og:url" content="https://kysii.com/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -132,6 +135,17 @@ dialog#player .ext{position:absolute;left:10px;top:10px;z-index:2;background:rgb
 .fact b{display:block;font-size:18px}
 .fact span{font-size:14px;color:var(--mute)}
 
+.pod{background:var(--blk);color:#f4f4f6;overflow:hidden}
+.pod .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:clamp(28px,5vw,72px);align-items:center}
+.pod .art{position:relative;max-width:520px;width:100%;justify-self:center}
+.pod .art::before{content:"";position:absolute;inset:12% 6% 0;background:radial-gradient(closest-side,rgba(215,20,26,.45),transparent);filter:blur(10px)}
+.pod .art img{position:relative;width:100%;height:auto;display:block}
+.pod .lede{color:#b9bbc2}
+.pod ul{list-style:none;padding:0;margin:22px 0 28px;display:grid;gap:10px}
+.pod li{display:flex;gap:12px;align-items:baseline;border-bottom:1px solid #26262c;padding-bottom:10px}
+.pod li b{flex:none;min-width:7em;color:var(--silver)}
+.pod .cta{display:flex;gap:12px;flex-wrap:wrap}
+@media(max-width:860px){.pod .wrap{grid-template-columns:minmax(0,1fr)}.pod .art{max-width:380px}}
 .press{background:var(--alt);border-block:1px solid var(--line);padding:28px max(5vw,16px)}
 .press .wrap{display:flex;flex-wrap:wrap;align-items:center;gap:14px 36px;justify-content:center}
 .press small{font-weight:700;color:var(--mute);font-size:14px}
@@ -188,6 +202,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
  <a class="logo" href="#top">KYSII<i>.</i></a>
  <ul>
   <li><a href="#shorts">Shorts</a></li>
+  <li><a href="#podcast">Podcast</a></li>
   <li><a href="#about">About</a></li>
   <li><a href="#ventures">Ventures</a></li>
   <li><a href="#merch">Merch</a></li>
@@ -279,6 +294,24 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
  </div>
 </div></section>
 
+<section class="band pod" id="podcast"><div class="wrap">
+ <div class="art"><img src="img/kickin-it-logo.webp" alt="Kickin' It With Kysii Podcast logo" width="900" height="900" loading="lazy"></div>
+ <div>
+  <h2>The Kickin' It With Kysii Show.</h2>
+  <p class="lede">Real talk with your guy. Current events, music, sports, tech, relationships and the topics everybody's debating, plus interviews with artists, comedians, podcasters and community voices.</p>
+  <ul>
+   <li><b>Watch</b><span>Full episodes and Shorts on YouTube at @kysiishow</span></li>
+   <li><b>Listen</b><span>On X Squad Radio and wherever you get podcasts</span></li>
+   <li><b>Join in</b><span>Got a story or a topic? Come kick it on the show</span></li>
+  </ul>
+  <div class="cta">
+   <a class="btn solid" href="https://www.youtube.com/@kysiishow">Watch on YouTube</a>
+   <a class="btn" href="https://xsquadradio.com">Listen on X Squad Radio</a>
+   <a class="btn" href="#contact">Be a guest</a>
+  </div>
+ </div>
+</div></section>
+
 <div class="press"><div class="wrap">
  <small>As seen on</small>
  <a href="https://www.cbsnews.com/atlanta/news/atlanta-business-owners-feel-impact-of-i-285s-weekend-construction-shutdown/">CBS News Atlanta</a>
@@ -320,7 +353,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
   <label for="n">Name<input id="n" autocomplete="name" required></label>
   <label for="e">Email<input id="e" type="email" autocomplete="email" required></label>
   <label for="t">What's it about?
-   <select id="t"><option>Brand collab</option><option>Guest spot / interview</option><option>Advertise on X Squad Radio</option><option>IAM / PAM consulting</option><option>Something else</option></select></label>
+   <select id="t"><option>Brand collab</option><option>Be a guest on the podcast</option><option>Advertise on X Squad Radio</option><option>IAM / PAM consulting</option><option>Something else</option></select></label>
   <label for="m">Message<textarea id="m" required></textarea></label>
   <button class="btn solid" type="submit">Send message</button>
   <div class="ok" id="ok" role="status">Thanks — this form is a preview and will be connected before launch.</div>
@@ -376,7 +409,7 @@ document.getElementById('eq').innerHTML=Array.from({length:18},(_,i)=>`<i style=
 
 const ventures=[
  {i:'radio',n:'X Squad Radio',d:'The network I founded — real DJs, hip-hop, R&B, house and soul, live 24/7 on the web, the app and Alexa.',u:'https://xsquadradio.com',l:'Listen at xsquadradio.com'},
- {i:'mic',n:"The Kickin' It With Kysii Show",d:'Real talk with your guy — guests, current events, relationships and the topics everybody is debating.',u:'#contact',l:'Be a guest'},
+ {i:'mic',n:"The Kickin' It With Kysii Show",d:'Real talk with your guy — guests, current events, relationships and the topics everybody is debating.',u:'#podcast',l:'About the show'},
  {i:'fire',n:"Cookin' It With Kysii",d:'My grilling channel on YouTube — fire, smoke, seasoning and backyard cooks. Quick grill clips land on my Instagram too.',u:'https://www.youtube.com/@kysiicooks',l:'@kysiicooks'},
  {i:'cup',n:'Cafe Bartique',d:'The neighborhood coffee shop my wife Angela and I own on Cascade Road in Atlanta — coffee, pastries, events and catering.',u:'https://cafebartique.com',l:'cafebartique.com'},
  {i:'shield',n:'Generational Technology Group',d:'IAM and PAM consulting — CyberArk expertise for organizations protecting their most privileged access.',u:'https://generationaltechgroup.com',l:'generationaltechgroup.com'}
@@ -396,6 +429,10 @@ const hook=(fid,oid)=>document.getElementById(fid).addEventListener('submit',e=>
  if(!f.checkValidity()){f.reportValidity();return}document.getElementById(oid).style.display='block';f.reset()});
 hook('f','ok');hook('mf','mok');
 document.getElementById('yr').textContent=new Date().getFullYear();
+// open links to other sites in a new tab so visitors keep kysii.com open
+const markExt=root=>root.querySelectorAll('a[href^="http"]').forEach(l=>{try{if(new URL(l.href).host!==location.host){l.target='_blank';l.rel='noopener noreferrer'}}catch(e){}});
+markExt(document);
+new MutationObserver(m=>m.forEach(x=>x.addedNodes.forEach(n=>{if(n.nodeType===1){if(n.matches('a[href^="http"]'))markExt(n.parentNode);else markExt(n)}}))).observe(document.body,{childList:true,subtree:true});
 }
 </script>
 </body>
