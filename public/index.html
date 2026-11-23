@@ -92,7 +92,13 @@ button.reel{padding:0;font:inherit;cursor:pointer;text-align:left;width:100%}
 .reel .meta{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;padding-top:40px}
 .igrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px;align-items:start}
 .igrid .instagram-media{min-width:0!important;width:100%!important;margin:0!important;border-radius:16px!important}
-.igcard{display:flex;flex-direction:column;justify-content:flex-end;aspect-ratio:4/5;border-radius:18px;background:linear-gradient(160deg,#d7141a,#0b0b0d);color:#fff;padding:20px;text-decoration:none;font-weight:700}
+.igrid blockquote.instagram-media{border:0!important;padding:0!important;background:none!important;box-shadow:none!important}
+.igskel{display:block;aspect-ratio:4/5;border-radius:16px;background:linear-gradient(100deg,var(--alt) 30%,var(--line) 50%,var(--alt) 70%) 0 0/300% 100%;animation:shimmer 1.4s linear infinite;font-size:0;color:transparent}
+@keyframes shimmer{to{background-position:-150% 0}}
+.igfall{grid-column:1/-1;display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:20px;align-items:center;padding:20px;border:1px solid var(--line);border-radius:20px;background:var(--alt)}
+.igfall img{width:72px;height:72px;border-radius:50%;object-fit:cover;border:3px solid var(--red)}
+.igfall b{display:block;font-size:19px}.igfall span{color:var(--mute);font-size:15px}
+@media(max-width:600px){.igfall{grid-template-columns:auto minmax(0,1fr)}.igfall .btn{grid-column:1/-1;justify-self:start}}
 dialog#player{padding:0;border:0;background:#000;border-radius:18px;width:min(420px,92vw);aspect-ratio:9/16;max-height:88vh;overflow:hidden}
 dialog#player::backdrop{background:rgba(0,0,0,.8)}
 dialog#player iframe{width:100%;height:100%;border:0;display:block}
@@ -358,10 +364,13 @@ R.addEventListener('click',e=>{const b=e.target.closest('.reel');if(!b)return;co
 dlg.querySelector('.x').addEventListener('click',closeP);
 dlg.addEventListener('click',e=>{if(e.target===dlg)closeP()});dlg.addEventListener('close',()=>{pf.src='about:blank'});
 
+const igFall=(G,url)=>{G.innerHTML=`<div class="igfall"><img src="img/portrait.webp" alt=""><div><b>@kickinitwithkysii</b><span>Talk, cooks and everyday life — catch my latest Reels on Instagram.</span></div><a class="btn solid" href="${url}">Watch on Instagram</a></div>`};
 fetch('data/instagram.json').then(r=>r.json()).then(d=>{const G=document.getElementById('igrid');
- G.innerHTML=d.reels.slice(0,3).map(c=>`<blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/${esc(c)}/" data-instgrm-version="14"><a class="igcard" href="https://www.instagram.com/reel/${esc(c)}/">Watch this Reel on Instagram →</a></blockquote>`).join('');
+ G.innerHTML=d.reels.slice(0,3).map(c=>`<blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/${esc(c)}/" data-instgrm-version="14"><a class="igskel" href="https://www.instagram.com/reel/${esc(c)}/">Watch on Instagram</a></blockquote>`).join('');
+ const fail=()=>{if(!G.querySelector('iframe'))igFall(G,d.url)};
  const sc=document.createElement('script');sc.async=true;sc.src='https://www.instagram.com/embed.js';
- sc.onload=()=>window.instgrm&&window.instgrm.Embeds.process();document.body.appendChild(sc)}).catch(()=>{});
+ sc.onload=()=>{window.instgrm&&window.instgrm.Embeds.process();setTimeout(fail,8000)};sc.onerror=fail;
+ document.body.appendChild(sc)}).catch(()=>igFall(document.getElementById('igrid'),'https://www.instagram.com/kickinitwithkysii/'));
 
 document.getElementById('eq').innerHTML=Array.from({length:18},(_,i)=>`<i style="animation-delay:${(i*137%900)/1000}s;animation-duration:${.7+(i*53%60)/100}s"></i>`).join('');
 
