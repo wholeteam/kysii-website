@@ -85,6 +85,19 @@ img.ph{width:100%;height:100%;object-fit:cover;display:block}
 .reel{position:relative;aspect-ratio:9/16;border-radius:18px;overflow:hidden;text-decoration:none;background:#1a1a1f;transition:transform .2s;border:2px solid var(--line)}
 .reel:hover{transform:translateY(-4px)}
 .note{font-size:13px;color:var(--mute);margin-top:16px}
+.follow{margin:22px 0 0;display:flex;gap:12px;flex-wrap:wrap}
+button.reel{padding:0;font:inherit;cursor:pointer;text-align:left;width:100%}
+.reel img.ph{transition:transform .3s}.reel:hover img.ph{transform:scale(1.04)}
+.reel .plat{max-width:calc(100% - 24px);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.reel .meta{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;padding-top:40px}
+.igrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px;align-items:start}
+.igrid .instagram-media{min-width:0!important;width:100%!important;margin:0!important;border-radius:16px!important}
+.igcard{display:flex;flex-direction:column;justify-content:flex-end;aspect-ratio:4/5;border-radius:18px;background:linear-gradient(160deg,#d7141a,#0b0b0d);color:#fff;padding:20px;text-decoration:none;font-weight:700}
+dialog#player{padding:0;border:0;background:#000;border-radius:18px;width:min(420px,92vw);aspect-ratio:9/16;max-height:88vh;overflow:hidden}
+dialog#player::backdrop{background:rgba(0,0,0,.8)}
+dialog#player iframe{width:100%;height:100%;border:0;display:block}
+dialog#player .x{position:absolute;top:10px;right:10px;width:44px;height:44px;border-radius:50%;border:0;background:rgba(0,0,0,.6);color:#fff;font-size:22px;cursor:pointer;z-index:2}
+dialog#player .ext{position:absolute;left:10px;top:10px;z-index:2;background:rgba(0,0,0,.6);color:#fff;padding:10px 14px;border-radius:999px;font-size:13px;font-weight:700;text-decoration:none}
 
 /* on air */
 .onair .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(28px,5vw,72px);align-items:center}
@@ -204,13 +217,19 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
   <p class="lede">Quick hits on life, business, music and tech — the conversations, the mixes and what's happening behind the counter.</p></div>
   <div class="tabs" role="group" aria-label="Filter clips">
    <button type="button" data-f="all" aria-pressed="true">All</button>
-   <button type="button" data-f="yt" aria-pressed="false">YouTube</button>
-   <button type="button" data-f="ig" aria-pressed="false">Instagram</button>
+   <button type="button" data-f="kickin" aria-pressed="false">Kickin' It</button>
+   <button type="button" data-f="cookin" aria-pressed="false">Cookin' It</button>
   </div>
  </div>
- <div class="reels" id="reels"></div>
- <p style="margin:22px 0 0;display:flex;gap:12px;flex-wrap:wrap"><a class="btn" href="https://instagram.com/kickinitwithkysii">Follow @kickinitwithkysii on Instagram</a> <a class="btn" href="https://www.youtube.com/channel/UCYqZ4RXDXOsEZqv50euu7og">Subscribe on YouTube</a></p>
- <p class="note">Sample clips shown — these get replaced by your latest Shorts and Reels, pulled in automatically.</p>
+ <div class="reels" id="reels"><p class="note">Loading the latest Shorts…</p></div>
+ <p class="follow"><a class="btn" href="https://www.youtube.com/@kysiishow">Subscribe: Kickin' It With Kysii</a> <a class="btn" href="https://www.youtube.com/@kysiicooks">Subscribe: Cookin' It With Kysii</a></p>
+
+ <div class="head" style="margin-top:clamp(48px,6vw,80px)">
+  <div><h2 style="font-size:clamp(26px,3.2vw,38px)">On Instagram.</h2>
+  <p class="lede">The latest Reels from @kickinitwithkysii — talk, cooks and everyday life.</p></div>
+ </div>
+ <div class="igrid" id="igrid"></div>
+ <p class="follow"><a class="btn solid" href="https://www.instagram.com/kickinitwithkysii/">Follow @kickinitwithkysii</a></p>
 </div></section>
 
 <section class="band dark onair" id="radio"><div class="wrap">
@@ -302,6 +321,8 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
  </form>
 </div></section>
 
+<dialog id="player" aria-label="Video player"><button class="x" type="button" aria-label="Close">×</button><a class="ext" id="ext" href="#">Open on YouTube</a><iframe id="pf" title="YouTube Short" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe></dialog>
+
 <footer><div class="wrap">
  <span>© <span id="yr"></span> Kysii Ingram · Real talk with your guy.</span>
  <a href="https://xsquadradio.com">xsquadradio.com</a>
@@ -320,30 +341,33 @@ const ic={
  bag:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 7h14l-1 14H6z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg>'
 };
 const grads=['#e3262c,#5a0609','#4a4b52,#0b0b0d','#c4c6cc,#55575e','#1f1f24,#000','#b0141a,#2a0204','#8d9098,#2a2b30','#d7141a,#0b0b0d','#3a3b42,#111'];
-const clips=[
- {p:'yt',t:"Kickin' It W/ Kysii — the conversation everybody's having"},
- {p:'ig',t:'Saturday morning at Cafe Bartique'},
- {p:'yt',t:"Jammin' It With Kysii — 90s slow jams"},
- {p:'ig',t:'Behind the boards at X Squad Radio'},
- {p:'yt',t:'Running a café, a station and a day job'},
- {p:'ig',t:'New on the menu this week'},
- {p:'yt',t:"Cookin' It With Kysii — low and slow ribs",u:'https://www.youtube.com/@kysiicooks'},
- {p:'ig',t:'Fired up the grill for the weekend'},
- {p:'yt',t:'Security tip: protect your admin accounts'},
- {p:'ig',t:'Black Restaurant Week on Cascade'}
-];
-const R=document.getElementById('reels');
-const draw=f=>{R.innerHTML=clips.map((c,i)=>({...c,i})).filter(c=>f==='all'||c.p===f).map(c=>
- `<a class="reel" href="${c.u?c.u:c.p==='ig'?'https://instagram.com/kickinitwithkysii':'https://www.youtube.com/channel/UCYqZ4RXDXOsEZqv50euu7og'}" aria-label="${c.p==='yt'?'YouTube Short':'Instagram Reel'}: ${c.t}"><div class="ph" style="background:linear-gradient(160deg,${grads[c.i%grads.length]})"></div><span class="plat">${ic[c.p]}${c.p==='yt'?'Shorts':'Reels'}</span><div class="play"></div><div class="meta">${c.t}</div></a>`).join('')};
-draw('all');
+const esc=t=>String(t).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const R=document.getElementById('reels');let vids=[],filt='all';
+const draw=()=>{const list=vids.filter(v=>filt==='all'||v.ch===filt);
+ if(filt==='all'){list.sort((a,b)=>a.n-b.n||(a.ch>b.ch?1:-1));}
+ R.innerHTML=list.length?list.slice(0,filt==='all'?10:8).map(v=>`<button type="button" class="reel" data-id="${esc(v.id)}" aria-label="Play: ${esc(v.title)}"><img class="ph" src="https://i.ytimg.com/vi/${esc(v.id)}/hqdefault.jpg" alt="" loading="lazy" onerror="this.style.display='none'"><span class="plat">${ic[v.ch==='cookin'?'fire':'yt']}${v.ch==='cookin'?"Cookin' It":"Kickin' It"}</span><div class="play"></div><div class="meta">${esc(v.title)}</div></button>`).join(''):'<p class="note">New Shorts are on the way — check the channels below.</p>'};
+fetch('data/youtube.json').then(r=>r.json()).then(d=>{Object.entries(d.channels).forEach(([k,c])=>c.videos.forEach((v,n)=>vids.push({...v,ch:k,n})));draw()}).catch(()=>{R.innerHTML='<p class="note">Watch the latest on YouTube below.</p>'});
 document.querySelectorAll('.tabs button').forEach(b=>b.addEventListener('click',()=>{
- document.querySelectorAll('.tabs button').forEach(x=>x.setAttribute('aria-pressed',x===b));draw(b.dataset.f)}));
+ document.querySelectorAll('.tabs button').forEach(x=>x.setAttribute('aria-pressed',x===b));filt=b.dataset.f;draw()}));
+const dlg=document.getElementById('player'),pf=document.getElementById('pf'),ext=document.getElementById('ext');
+const closeP=()=>{pf.src='about:blank';if(dlg.open)dlg.close()};
+R.addEventListener('click',e=>{const b=e.target.closest('.reel');if(!b)return;const id=b.dataset.id;
+ ext.href=`https://www.youtube.com/shorts/${id}`;
+ if(typeof dlg.showModal!=='function'){location.href=ext.href;return}
+ pf.src=`https://www.youtube-nocookie.com/embed/${id}?autoplay=1&playsinline=1&rel=0`;dlg.showModal()});
+dlg.querySelector('.x').addEventListener('click',closeP);
+dlg.addEventListener('click',e=>{if(e.target===dlg)closeP()});dlg.addEventListener('close',()=>{pf.src='about:blank'});
+
+fetch('data/instagram.json').then(r=>r.json()).then(d=>{const G=document.getElementById('igrid');
+ G.innerHTML=d.reels.slice(0,3).map(c=>`<blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/${esc(c)}/" data-instgrm-version="14"><a class="igcard" href="https://www.instagram.com/reel/${esc(c)}/">Watch this Reel on Instagram →</a></blockquote>`).join('');
+ const sc=document.createElement('script');sc.async=true;sc.src='https://www.instagram.com/embed.js';
+ sc.onload=()=>window.instgrm&&window.instgrm.Embeds.process();document.body.appendChild(sc)}).catch(()=>{});
 
 document.getElementById('eq').innerHTML=Array.from({length:18},(_,i)=>`<i style="animation-delay:${(i*137%900)/1000}s;animation-duration:${.7+(i*53%60)/100}s"></i>`).join('');
 
 const ventures=[
  {i:'radio',n:'X Squad Radio',d:'The network I founded — real DJs, hip-hop, R&B, house and soul, live 24/7 on the web, the app and Alexa.',u:'https://xsquadradio.com',l:'Listen at xsquadradio.com'},
- {i:'mic',n:"The Kickin' It W/ Kysii Show",d:'Real talk with your guy — guests, current events, relationships and the topics everybody is debating.',u:'#contact',l:'Be a guest'},
+ {i:'mic',n:"The Kickin' It With Kysii Show",d:'Real talk with your guy — guests, current events, relationships and the topics everybody is debating.',u:'#contact',l:'Be a guest'},
  {i:'fire',n:"Cookin' It With Kysii",d:'My grilling channel on YouTube — fire, smoke, seasoning and backyard cooks. Quick grill clips land on my Instagram too.',u:'https://www.youtube.com/@kysiicooks',l:'@kysiicooks'},
  {i:'cup',n:'Cafe Bartique',d:'The neighborhood coffee shop my wife Angela and I own on Cascade Road in Atlanta — coffee, pastries, events and catering.',u:'https://cafebartique.com',l:'cafebartique.com'},
  {i:'shield',n:'Generational Technology Group',d:'IAM and PAM consulting — CyberArk expertise for organizations protecting their most privileged access.',u:'https://generationaltechgroup.com',l:'generationaltechgroup.com'}
@@ -356,7 +380,7 @@ document.getElementById('tees').innerHTML=[['#0b0b0d','#c4c6cc','Black'],['#ffff
 const gal=[['cafe-bartique-event','Out front at Cafe Bartique','50% 35%'],['falcons-with-angela','Falcons Sundays with Angela','50% 40%'],['morehouse','Back home at Morehouse','40% 40%'],['x-squad-jersey','Repping the X Squad','50% 30%'],['game-day','Game day in the A','50% 35%'],['gala','A night out with Angela','50% 22%'],['glasses','Everyday Kysii','50% 30%']];
 document.getElementById('gal').innerHTML=gal.map(g=>`<div><img src="img/${g[0]}.webp" alt="${g[1]}" loading="lazy" style="object-position:${g[2]}"><span>${g[1]}</span></div>`).join('');
 
-const so=[{i:'yt',n:'Kickin\' It With Kysii',u:'https://www.youtube.com/channel/UCYqZ4RXDXOsEZqv50euu7og'},{i:'fire',n:'@kysiicooks',u:'https://www.youtube.com/@kysiicooks'},{i:'ig',n:'@kickinitwithkysii',u:'https://instagram.com/kickinitwithkysii'},{i:'radio',n:'X Squad Radio',u:'https://xsquadradio.com'},{i:'cup',n:'Cafe Bartique',u:'https://cafebartique.com'}];
+const so=[{i:'yt',n:'Kickin\' It With Kysii',u:'https://www.youtube.com/@kysiishow'},{i:'fire',n:'@kysiicooks',u:'https://www.youtube.com/@kysiicooks'},{i:'ig',n:'@kickinitwithkysii',u:'https://instagram.com/kickinitwithkysii'},{i:'radio',n:'X Squad Radio',u:'https://xsquadradio.com'},{i:'cup',n:'Cafe Bartique',u:'https://cafebartique.com'}];
 document.getElementById('socials').innerHTML=so.map(s=>`<a href="${s.u}">${ic[s.i]}${s.n}</a>`).join('');
 
 const hook=(fid,oid)=>document.getElementById(fid).addEventListener('submit',e=>{e.preventDefault();const f=e.target;
